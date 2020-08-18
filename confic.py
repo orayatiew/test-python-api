@@ -1,0 +1,1 @@
+MENU = "richmenu-b607ce567e3fb7c23075e0a368a03e3c"
