@@ -22,11 +22,14 @@ line_bot_api = LineBotApi('otJs5SdG/q3EB7zY0jWpPtkoUP0YIZAKeTxtIiBc3fLzwejucW06U
 handler = WebhookHandler('a6eaf3123707544bf4e0927af0cea4b8')
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy   dog'
+app.config['CORS_HEADERS'] = 'Content-Type'
 api = Api(app)
-CORS(app)
-
+#CORS(app)
+cors = CORS(app, resources={r"/linkrichmenu": {"origins": "http://localhost:4200"}})
 
 @app.route('/linkrichmenu', methods=['GET'])
+@cross_origin(origin='localhost',headers=['Content- Type','Authorization'])
 def LinkRichMenuToUser(userId):
     response = Flask.jsonify({'some': 'data'})
     response.headers.add('Access-Control-Allow-Origin', '*')
