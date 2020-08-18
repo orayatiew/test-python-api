@@ -25,14 +25,26 @@ app = Flask(__name__)
 api = Api(app)
 CORS(app)
 
-class LinkRichMenuToUser(Resource):
-    def get(self,userId):
-        print('userId',str(userId))
-        rich_menu_id = 'richmenu-b607ce567e3fb7c23075e0a368a03e3c'
-        line_bot_api.link_rich_menu_to_user(userId, rich_menu_id)
-        return {'status':'upLoadImagevFor Training'}
 
-api.add_resource(LinkRichMenuToUser, '/linkrichmenu/<userId>') # Route_1
+@app.route('/linkrichmenu', methods=['GET'])
+def LinkRichMenuToUser(userId):
+    response = Flask.jsonify({'some': 'data'})
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    print('userId',str(userId))
+    rich_menu_id = 'richmenu-b607ce567e3fb7c23075e0a368a03e3c'
+    line_bot_api.link_rich_menu_to_user(userId, rich_menu_id)
+    return response
+
+#api.add_resource(LinkRichMenuToUser, '/linkrichmenu/<userId>') # Route_1
+
+#class LinkRichMenuToUser(Resource):
+    #def get(self,userId):
+        #print('userId',str(userId))
+       # rich_menu_id = 'richmenu-b607ce567e3fb7c23075e0a368a03e3c'
+        #line_bot_api.link_rich_menu_to_user(userId, rich_menu_id)
+        #return {'status':'upLoadImagevFor Training'}
+
+#pi.add_resource(LinkRichMenuToUser, '/linkrichmenu/<userId>') # Route_1
 
 if __name__ == '__main__':
     app.run(port=5002)
